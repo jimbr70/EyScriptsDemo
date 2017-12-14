@@ -1,15 +1,16 @@
-$script1=(get-item env:qsscript1_url).Value
-$script2=(get-item env:qsscript2_url).Value
-$script3=(get-item env:qsscript3_url).Value
+$script_count=(get-item env:qsscript_count).Value
+$script_name = ""
+$output=""
 
+For ($i=1; $i -le $script_count; $i++) {
+    $script_name ="qsscript{0}_url" -f $i
 
-Invoke-WebRequest -Uri $script1 -OutFile "c:\\downloadme1.txt"
-Invoke-WebRequest -Uri $script2 -OutFile "c:\\downloadme2.txt"
-Invoke-WebRequest -Uri $script2 -OutFile "c:\\downloadme3.txt"
+    Write-host  ( $script_name)
+    $script_url=(get-item env:$script_name).Value
+    Write-host  ( $script_url)
+    $output="c:\\{0}.txt" -f $script_name 
+    Invoke-WebRequest -Uri $script_url -OutFile $output
+}
 
-#$url ="https://raw.githubusercontent.com/QualiSystems/EyScriptsDemo/master/downloadme1.txt"
-#$output = "$PSScriptRoot\downloadme1.txt"
-#$output2 = "c:\\downloadme1.txt"
-#Invoke-WebRequest -Uri $url -OutFile $output2
 
 
