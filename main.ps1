@@ -1,8 +1,7 @@
 $script_count=(get-item env:qsscript_count).Value
 $script_name = ""
 $output=""
-$pname=(get-item env:qspname).Value
-$uname=(get-item env:qsuname).Value
+
 
 For ($i=1; $i -le $script_count; $i++) {
     $script_name ="qsscript{0}_url" -f $i
