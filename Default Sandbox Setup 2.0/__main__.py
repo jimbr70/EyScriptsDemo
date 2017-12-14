@@ -13,24 +13,27 @@ def azure_app_extention(sandbox, components):
     #build_id = sandbox.global_inputs['build_id']
 
     # Configure web servers
-    application_server_address = sandbox.components.get_apps_by_name_contains('Application')[0].deployed_app.FullAddress
+    # application_server_address = sandbox.components.get_apps_by_name_contains('Application')[0].deployed_app.FullAddress
 
-    web_servers = sandbox.components.get_apps_by_name_contains('Web')
+    azure_from_market_apps = sandbox.components.get_apps_by_name_contains('azurefrommarket')
+    # get uname and pword from the resource that keeps them
+    # decrypt the password
+    # execute the script woth the user anem and the password
 
-    for app in web_servers:
+    for app in azure_from_market_apps:
         sandbox.apps_configuration.set_config_param(app=app,
-                                                    key='Application Server',
-                                                    value=application_server_address)
+                                                    key='qspword',
+                                                    value="pword1")
 
         sandbox.apps_configuration.set_config_param(app=app,
-                                                    key='build_id',
-                                                    value=build_id)
+                                                    key='qsuname',
+                                                    value="uname1")
 
         sandbox.automation_api.WriteMessageToReservationOutput(reservationId=sandbox.id,
-                                                               message='AzureApp configured with build_id {0}, and Application Server address {1}'
-                                                               .format(str(build_id), str(application_server_address)))
+                                                               message='AzureApp configured')
 
-    sandbox.apps_configuration.apply_apps_configurations(web_servers)
+    sandbox.apps_configuration.apply_apps_configurations(azure_from_market_apps)
+
     sandbox.automation_api.WriteMessageToReservationOutput(reservationId=sandbox.id,
                                                            message='Finished to configure Web Servers')
 
