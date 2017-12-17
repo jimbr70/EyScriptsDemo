@@ -4,6 +4,8 @@ $output=""
 
 #$pname=(get-item env:qspname).Value
 #$uname=(get-item env:qsuname).Value
+#$execute_command=(get-item env:qsexecute_command).Value
+
 
 
 For ($i=1; $i -le $script_count; $i++) {
