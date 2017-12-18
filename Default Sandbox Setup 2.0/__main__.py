@@ -9,17 +9,21 @@ def main():
     sandbox.execute_setup()
 
 
+
 def azure_app_extention(sandbox, components):
+
+    resource = sandbox.automation_api.GetResourceDetails("qs_cred_resource")
+    password = next(iter(c for c in resource.ResourceAttributes if c == "password"), None)
+    sandbox.automation_api.DecryptPassword(password)
+    uname = next(iter(c for c in resource.ResourceAttributes if c == "uname"), None)
+
+
     #build_id = sandbox.global_inputs['build_id']
 
     # Configure web servers
     # application_server_address = sandbox.components.get_apps_by_name_contains('Application')[0].deployed_app.FullAddress
 
     azure_from_market_apps = sandbox.components.get_apps_by_name_contains('azurefrommarket')
-    #REBOT ALL APPS
-    # power off
-    # power on
-
 
     # get uname and pword from the resource that keeps them
     # decrypt the password
@@ -43,5 +47,12 @@ def azure_app_extention(sandbox, components):
                                                            message='Finished to configure Azure apps')
 
 main()
+
+
+
+
+
+
+
 
 
