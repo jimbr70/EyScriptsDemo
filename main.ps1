@@ -3,7 +3,7 @@ $script_name = ""
 $output=""
 $logspath="c:\qs_scripts_logs.txt"
 
-$pname=(get-item env:qspname).Value
+$pname=(get-item env:qspword).Value
 $uname=(get-item env:qsuname).Value
 $execute_command=(get-item env:qsexecute_command).Value
 
