@@ -23,7 +23,7 @@ For ($i=1; $i -le $script_count; $i++) {
     Invoke-WebRequest -Uri $script_url -OutFile $output
 }
 
-$msg= "`n got pass {0} and uname :{1} and execute command {2} "-f $pname $uname $execute_command
+$msg= "`n got pass {0} and uname :{1} and execute command {2} "-f $pname,$uname,$execute_command
 Add-Content $logspath $msg
 
 
