@@ -16,6 +16,11 @@ def azure_app_extention(sandbox, components):
     # application_server_address = sandbox.components.get_apps_by_name_contains('Application')[0].deployed_app.FullAddress
 
     azure_from_market_apps = sandbox.components.get_apps_by_name_contains('azurefrommarket')
+    #REBOT ALL APPS
+    # power off
+    # power on
+
+
     # get uname and pword from the resource that keeps them
     # decrypt the password
     # execute the script woth the user anem and the password
@@ -35,7 +40,7 @@ def azure_app_extention(sandbox, components):
     sandbox.apps_configuration.apply_apps_configurations(azure_from_market_apps)
 
     sandbox.automation_api.WriteMessageToReservationOutput(reservationId=sandbox.id,
-                                                           message='Finished to configure Web Servers')
+                                                           message='Finished to configure Azure apps')
 
 main()
 
