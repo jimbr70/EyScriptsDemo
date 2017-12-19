@@ -5,10 +5,6 @@ from cloudshell.workflow.orchestration.setup.default_setup_orchestrator import D
 def main():
     sandbox = Sandbox()
     DefaultSetupWorkflow().register(sandbox, enable_configuration=False)
-    sandbox.automation_api.WriteMessageToReservationOutput(reservationId=sandbox.id,message='1')
-
-
-
     sandbox.workflow.add_to_configuration(function=azure_app_extention,components=sandbox.components.apps)
     sandbox.execute_setup()
 
