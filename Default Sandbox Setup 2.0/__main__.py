@@ -12,10 +12,10 @@ def main():
 
 def azure_app_extention(sandbox, components):
 
-    resource = sandbox.automation_api.GetResourceDetails("qs_cred_resource")
-    password = next(iter(c for c in resource.ResourceAttributes if c == "password"), None)
-    sandbox.automation_api.DecryptPassword(password)
-    uname = next(iter(c for c in resource.ResourceAttributes if c == "uname"), None)
+    # resource = sandbox.automation_api.GetResourceDetails("qs_cred_resource")
+    # password = next(iter(c for c in resource.ResourceAttributes if c == "password"), None)
+    # sandbox.automation_api.DecryptPassword(password)
+    # uname = next(iter(c for c in resource.ResourceAttributes if c == "uname"), None)
 
 
     #build_id = sandbox.global_inputs['build_id']
@@ -28,6 +28,9 @@ def azure_app_extention(sandbox, components):
     # get uname and pword from the resource that keeps them
     # decrypt the password
     # execute the script woth the user anem and the password
+
+    sandbox.automation_api.WriteMessageToReservationOutput(reservationId=sandbox.id,
+                                                           message='Azure app from market found {0}'.format(len(azure_from_market_apps)))
 
     for app in azure_from_market_apps:
         sandbox.apps_configuration.set_config_param(app=app,
@@ -44,7 +47,7 @@ def azure_app_extention(sandbox, components):
     sandbox.apps_configuration.apply_apps_configurations(azure_from_market_apps)
 
     sandbox.automation_api.WriteMessageToReservationOutput(reservationId=sandbox.id,
-                                                           message='Finished to configure Azure apps')
+                                                           message='Finished configuring Azure apps')
 
 main()
 
