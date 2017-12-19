@@ -21,8 +21,8 @@ def azure_app_extention(sandbox, components):
                                                            message='Reading data from qs resource')
 
     password = next((c.Value for c in resource.ResourceAttributes if (c.Name == "Password")), None)
-    decrypt_password = sandbox.automation_api.DecryptPassword(password)
-    uname = next(iter(c for c in resource.ResourceAttributes if c == "User"), None)
+    decrypt_password = sandbox.automation_api.DecryptPassword(password).Value
+    uname = next((c.Value for c in resource.ResourceAttributes if (c.Name == "User")), None)
 
     sandbox.automation_api.WriteMessageToReservationOutput(reservationId=sandbox.id,
                                                            message='Uname {0} and powrd {1} found '.format(uname,decrypt_password))
