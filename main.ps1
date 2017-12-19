@@ -16,7 +16,7 @@ For ($i=1; $i -le $script_count; $i++) {
     $script_url=(get-item env:$script_name).Value
     Write-host  ( $script_url)	
 	
-	$fileName = $url.Substring($url.LastIndexOf("/")+1)
+	$fileName = $script_url.Substring($script_url.LastIndexOf("/")+1)
     $output="c:\\{0}.txt" -f $fileName
 	
     $msg= "`n downloading url : {0}"-f $script_url 
