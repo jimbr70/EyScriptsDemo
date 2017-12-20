@@ -29,7 +29,7 @@ $msg= "`n got pass {0} and uname :{1} and execute command {2} "-f $pname,$uname,
 Add-Content $logspath $msg
 
 $command = "powershell -file {0}" -f $execute_command
-$msg= "`n executing the command {2} "-f $execute_command
+$msg= "`n executing the command {0} "-f $execute_command
 Add-Content $logspath $msg
 
 Invoke-Expression $command
