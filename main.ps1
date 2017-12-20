@@ -1,3 +1,4 @@
+Set-ExecutionPolicy Unrestricted
 $script_count=(get-item env:qsscript_count).Value
 $script_name = ""
 $output=""
@@ -32,8 +33,11 @@ $msg= "`n executing the command {0} "-f $execute_command
 Add-Content $logspath $msg
 
 $cmd="c:\\{0}" -f $execute_command
-Invoke-Expression(start powershell ($cmd))
 
+$a = "powershell -file $cmd"
+Invoke-Expression $a
+
+#Invoke-Expression(start powershell ($cmd))
 #Invoke-Item (start powershell ( $cmd))
 
 
