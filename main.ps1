@@ -1,4 +1,4 @@
-Set-ExecutionPolicy Unrestricted
+#Set-ExecutionPolicy Unrestricted
 $script_count=(get-item env:qsscript_count).Value
 $script_name = ""
 $output=""
