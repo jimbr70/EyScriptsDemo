@@ -1,4 +1,4 @@
-param([Int32]$data)
+param($data)
 $logspath="c:\qs_scripts_logs_test_run{0}.txt" -f $data
 New-Item $logspath -type file -force
 Add-Content $logspath "`nstarts script download"
