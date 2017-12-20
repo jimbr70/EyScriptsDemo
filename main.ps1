@@ -18,7 +18,7 @@ For ($i=1; $i -le $script_count; $i++) {
     Write-host  ( $script_url)	
 	
 	$fileName = $script_url.Substring($script_url.LastIndexOf("/")+1)
-    $output="c:\\{0}" -f $fileName
+    $output="c:\\temp\{0}" -f $fileName
 	
     $msg= "`n downloading url : {0}"-f $script_url 
 	Add-Content $logspath $msg
@@ -32,7 +32,7 @@ Add-Content $logspath $msg
 $msg= "`n executing the command {0} "-f $execute_command
 Add-Content $logspath $msg
 
-$cmd="c:\\{0}" -f $execute_command
+$cmd="c:\\temp\{0}" -f $execute_command
 
 $a = "powershell -file $cmd"
 Invoke-Expression $a
