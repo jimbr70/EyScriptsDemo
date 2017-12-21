@@ -32,6 +32,10 @@ Add-Content $logspath $msg
 $msg= "`n executing the command {0} "-f $execute_command
 Add-Content $logspath $msg
 
+$msg= "`n psscriptroot {0} "-f $PSScriptRoot
+Add-Content $logspath $msg
+
+
 $cmd="c:\\tempqs\{0}" -f $execute_command
 
 $a = "powershell -file $cmd"
