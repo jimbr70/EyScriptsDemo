@@ -32,7 +32,7 @@ Add-Content $logspath $msg
 $msg= "`n executing the command {0} "-f $execute_command
 Add-Content $logspath $msg
 
-$msg= "`n psscriptroot {0} "-f $PSScriptRoot
+$msg= "`n psscriptroot : {0} :"-f $PSScriptRoot
 Add-Content $logspath $msg
 
 
