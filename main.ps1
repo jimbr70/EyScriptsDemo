@@ -4,8 +4,8 @@ $script_name = ""
 $output=""
 $logspath="c:\qs_scripts_logs.txt"
 
-$pname=(get-item env:qspword).Value
-$uname=(get-item env:qsuname).Value
+#$pname=(get-item env:qspword).Value
+#$uname=(get-item env:qsuname).Value
 $execute_command=(get-item env:qsexecute_command).Value
 
 New-Item $logspath -type file -force
@@ -26,7 +26,8 @@ For ($i=1; $i -le $script_count; $i++) {
     Invoke-WebRequest -Uri $script_url -OutFile $output
 }
 
-$msg= "`n got pass {0} and uname :{1} and execute command {2} "-f $pname,$uname,$execute_command
+#$msg= "`n got pass {0} and uname :{1} and execute command {2} "-f $pname,$uname,$execute_command
+$msg= "`n got execute command {0} "-f $execute_command
 Add-Content $logspath $msg
 
 $msg= "`n executing the command {0} "-f $execute_command
