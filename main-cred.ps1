@@ -1,14 +1,14 @@
+$logspath="c:\qs_scripts_logs.txt"
+New-Item $logspath -type file -force
+Add-Content $logspath "`nstarts script download  " + (get-date -Format "MM-dd-yyyy_hh:mm:ss")
+
 $script_count=(get-item env:qsscript_count).Value
 $script_name = ""
 $output=""
-$logspath="c:\qs_scripts_logs.txt"
 
 $pname=(get-item env:qspword).Value
 $uname=(get-item env:qsuname).Value
 $execute_command=(get-item env:qsexecute_command).Value
-
-New-Item $logspath -type file -force
-Add-Content $logspath "`nstarts script download"
 
 For ($i=1; $i -le $script_count; $i++) {
     $script_name ="qsscript{0}_url" -f $i
@@ -16,7 +16,7 @@ For ($i=1; $i -le $script_count; $i++) {
     $script_url=(get-item env:$script_name).Value
     Write-host  ( $script_url)	
 	
-	$fileName = $script_url.Substring($script_url.LastIndexOf("/")+1)
+    $fileName = $script_url.Substring($script_url.LastIndexOf("/")+1)
     $output="c:\\{0}" -f $fileName
 	
     $msg= "`n downloading url : {0}"-f $script_url 
