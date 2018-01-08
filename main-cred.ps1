@@ -42,9 +42,6 @@ For ($i=1; $i -le $script_count; $i++) {
     Add-Content $logspath "-----------------------------------------------"
 }
 
-$msg= "`n  execute command {2} "-f $pname,$uname,$execute_command
-Add-Content $logspath $msg
-
 $msg= "`n executing the command {0} "-f $execute_command
 Add-Content $logspath $msg
 
