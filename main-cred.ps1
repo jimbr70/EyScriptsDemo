@@ -18,7 +18,7 @@ Add-Content $logspath "`nStart script download"
 # hard was $uname, $pword
 $user = "ET\V9999982"
 $pass = "Chang3M3"
-$msg = "user/pass: {0}/{1}" -f $user, $pass
+$msg = "user {0},  pass {1}" -f $user, $pass
 Add-Content $logspath $msg
     
 For ($i=1; $i -le $script_count; $i++) {
@@ -31,7 +31,7 @@ For ($i=1; $i -le $script_count; $i++) {
     $output="c:\\{0}" -f $fileName
     Add-Content $logspath $output
     
-    $msg= "`n downloading url : {0}"-f $script_url 
+    $msg= "`nDownloading  {0}"-f $script_url 
     Add-Content $logspath $msg
 
     $securepassword = ConvertTo-SecureString $pass -AsPlainText -Force
@@ -55,8 +55,6 @@ $cmd="c:\\{0}" -f $execute_command
 $a = "powershell -file $cmd"
 Invoke-Expression $a
 
-#Invoke-Expression(start powershell ($cmd))
-#Invoke-Item (start powershell ( $cmd))
+Add-Content $logspath "Returned from command. Script Complete."
 
-
-
+#END
