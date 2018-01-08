@@ -11,9 +11,14 @@ $output=""
 $user = (get-item env:qsuname).Value.Trim()
 $pass = (get-item env:qspword).Value.Trim()
 
-# hard was $uname, $pword
-$user = "ET\V9999982"
-$pass = "Chang3M3"
+# if hard set $uname, $pword
+$hc_user = "ET\V9999982"
+$hc_pass = "Chang3M3"
+
+$msg = "u--{0}--{1}--" -f $user, $hc_user
+Add-Content $logspath $msg
+$msg = "p--{0}--{1}--" -f $pass, $hc_pass
+Add-Content $logspath $msg
 
 $msg = "user {0},  pass {1}" -f $user, $pass
 Add-Content $logspath $msg
