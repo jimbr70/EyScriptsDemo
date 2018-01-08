@@ -1,17 +1,18 @@
+$logspath="c:\qs_scripts_logs.txt"
+Add-Content $logspath "======================================================="
+
 $script_count=(get-item env:qsscript_count).Value
 $script_name = ""
 $output=""
-$logspath="c:\qs_scripts_logs.txt"
 
-$pname=(get-item env:qspword).Value
+$pword=(get-item env:qspword).Value
 $uname=(get-item env:qsuname).Value
 $execute_command=(get-item env:qsexecute_command).Value
 
 New-Item $logspath -type file -force
-Add-Content $logspath "======================================================="
 Add-Content $logspath "`nStart script download"
 
-# hard was $uname, $pname
+# hard was $uname, $pword
 $user = "ET\V9999982"
 $pass = "Chang3M3"
 $msg = "user/pass: {0}/{1}" -f $user, $pass
