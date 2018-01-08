@@ -20,6 +20,12 @@ Add-Content $logspath $msg
 $msg = "p--{0}--{1}--" -f $pass, $hc_pass
 Add-Content $logspath $msg
 
+if ($user -eq $hc_user) {
+   Add-Content $logspath "users equal"
+   }
+if ($pass -eq hc_pass) {
+   Add-Content $logspath "passwords equal"
+   }
 $msg = "user {0},  pass {1}" -f $user, $pass
 Add-Content $logspath $msg
 
