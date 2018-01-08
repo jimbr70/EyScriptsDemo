@@ -59,14 +59,23 @@ For ($i=1; $i -le $script_count; $i++) {
     Add-Content $logspath "-----------------------------------------------"
 }
 
-$msg= "`nExecuting command {0} "-f $execute_command
-Add-Content $logspath $msg
+Try {
+    $msg= "`nExecuting command {0} "-f $execute_command
+    Add-Content $logspath $msg
 
-$cmd="c:\\{0}" -f $execute_command
+    $cmd="c:\\{0}" -f $execute_command
 
-$a = "powershell -file $cmd"
-Invoke-Expression $a
+    $a = "powershell -file $cmd"
+    Invoke-Expression $a
 
-Add-Content $logspath "Returned from Invoke-Expression.  Script main-cred.ps1 is complete."
+    Add-Content $logspath "Returned from Invoke-Expression.  Script main-cred.ps1 is complete."
+    }
+     Catch {
+    $ErrorMessage = $_.Exception.Message
+    $FailedItem = $_.Exception.ItemName
+    Add-Content $logspath "ERROR. FAILED execution of script!"
+    Add-Content $logspath $ErrorMessage
+    Add-Content $logspath $FailedItem
+    }
 
 #END
