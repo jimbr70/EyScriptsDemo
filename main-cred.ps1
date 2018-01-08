@@ -12,15 +12,15 @@ $user = (get-item env:qsuname).Value.Trim()
 $pass = (get-item env:qspword).Value.Trim()
 
 # hard was $uname, $pword
-#$user = "ET\V9999982"
-#$pass = "Chang3M3"
+$user = "ET\V9999982"
+$pass = "Chang3M3"
 
 $msg = "user {0},  pass {1}" -f $user, $pass
 Add-Content $logspath $msg
 
 $execute_command=(get-item env:qsexecute_command).Value
 
-Add-Content $logspath "`nStart script download"
+Add-Content $logspath "`nStarting downloads"
     
 For ($i=1; $i -le $script_count; $i++) {
     Try {
