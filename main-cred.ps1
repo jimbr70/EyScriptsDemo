@@ -1,3 +1,4 @@
+New-Item $logspath -type file -force
 $logspath="c:\qs_scripts_logs.txt"
 Add-Content $logspath "==================main-cred.ps1========================="
 
@@ -7,19 +8,17 @@ Add-Content $logspath $envVars
 $script_count=(get-item env:qsscript_count).Value
 $script_name = ""
 $output=""
-
-$pword=(get-item env:qspword).Value
-$uname=(get-item env:qsuname).Value
-$execute_command=(get-item env:qsexecute_command).Value
-
-New-Item $logspath -type file -force
-Add-Content $logspath "`nStart script download"
+$user = (get-item env:qsuname).Value
+$pass = (get-item env:qspword).Value
 
 # hard was $uname, $pword
 $user = "ET\V9999982"
 $pass = "Chang3M3"
+
 $msg = "user {0},  pass {1}" -f $user, $pass
 Add-Content $logspath $msg
+
+Add-Content $logspath "`nStart script download"
     
 For ($i=1; $i -le $script_count; $i++) {
     Try {
