@@ -54,6 +54,6 @@ $cmd="c:\\{0}" -f $execute_command
 $a = "powershell -file $cmd"
 Invoke-Expression $a
 
-Add-Content $logspath "Returned from command. Script Complete."
+Add-Content $logspath "Returned from Invoke-Expression.  Script main-cred.ps1 is complete."
 
 #END
