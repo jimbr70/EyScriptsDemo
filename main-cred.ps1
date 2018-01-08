@@ -15,7 +15,7 @@ For ($i=1; $i -le $script_count; $i++) {
     $script_url=(get-item env:$script_name).Value
     Add-Content $logspath $script_url
     
-    $fileName = $script_url.Substring($script_url.LastIndexOf("/")+1)
+    $fileName = $script_url.Substring($script_url.LastIndexOf("/")+1).Split("&")[0]
     $output="c:\\{0}" -f $fileName
     Add-Content $logspath $output
     
