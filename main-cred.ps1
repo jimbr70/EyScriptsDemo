@@ -8,9 +8,15 @@ $uname=(get-item env:qsuname).Value
 $execute_command=(get-item env:qsexecute_command).Value
 
 New-Item $logspath -type file -force
-Add-Content $logspath "`nstarts script download"
+Add-Content $logspath "======================================================="
+Add-Content $logspath "`nStart script download"
 
-
+# hard was $uname, $pname
+$user = "ET\V9999982"
+$pass = "Chang3M3"
+$msg = "user/pass: {0}/{1}" -f $user, $pass
+Add-Content $logspath $msg
+    
 For ($i=1; $i -le $script_count; $i++) {
     Try {
     $script_name ="qsscript{0}_url" -f $i
@@ -24,11 +30,6 @@ For ($i=1; $i -le $script_count; $i++) {
     $msg= "`n downloading url : {0}"-f $script_url 
     Add-Content $logspath $msg
 
-    $user = $uname
-    $pass = $pname
-    Add-Content $logspath $user
-    Add-Content $logspath $pass
-    
     $securepassword = ConvertTo-SecureString $pass -AsPlainText -Force
     $credentials = New-Object System.Management.Automation.PSCredential($user, $securepassword)
     Invoke-WebRequest -Uri $script_url -Credential $credentials -OutFile $output
