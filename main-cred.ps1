@@ -18,6 +18,8 @@ $pass = (get-item env:qspword).Value.Trim()
 $msg = "user {0},  pass {1}" -f $user, $pass
 Add-Content $logspath $msg
 
+$execute_command=(get-item env:qsexecute_command).Value
+
 Add-Content $logspath "`nStart script download"
     
 For ($i=1; $i -le $script_count; $i++) {
@@ -46,7 +48,7 @@ For ($i=1; $i -le $script_count; $i++) {
     Add-Content $logspath "-----------------------------------------------"
 }
 
-$msg= "`n executing the command {0} "-f $execute_command
+$msg= "`nExecuting command {0} "-f $execute_command
 Add-Content $logspath $msg
 
 $cmd="c:\\{0}" -f $execute_command
