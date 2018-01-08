@@ -1,6 +1,6 @@
 New-Item $logspath -type file -force
 $logspath="c:\qs_scripts_logs.txt"
-Add-Content $logspath "==================main-cred.ps1========================="
+Add-Content $logspath "==================main-cred.ps1=============V0.0============"
 
 $envVars = (gci env:*).GetEnumerator() | Sort-Object Name | Out-String
 Add-Content $logspath $envVars
@@ -8,12 +8,12 @@ Add-Content $logspath $envVars
 $script_count=(get-item env:qsscript_count).Value
 $script_name = ""
 $output=""
-$user = (get-item env:qsuname).Value
-$pass = (get-item env:qspword).Value
+$user = (get-item env:qsuname).Value.Trim()
+$pass = (get-item env:qspword).Value.Trim()
 
 # hard was $uname, $pword
-$user = "ET\V9999982"
-$pass = "Chang3M3"
+#$user = "ET\V9999982"
+#$pass = "Chang3M3"
 
 $msg = "user {0},  pass {1}" -f $user, $pass
 Add-Content $logspath $msg
