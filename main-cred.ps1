@@ -1,5 +1,5 @@
 $logspath="c:\qs_scripts_logs.txt"
-Add-Content $logspath "======================================================="
+Add-Content $logspath "==================main-cred.ps1========================="
 
 $envVars = (gci env:*).GetEnumerator() | Sort-Object Name | Out-String
 Add-Content $logspath $envVars
