@@ -20,7 +20,7 @@ def azure_app_extention(sandbox, components):
     tfs_uname = next((c.Value for c in resource.ResourceAttributes if (c.Name == "TFS_User")), None)
 
     sandbox.automation_api.WriteMessageToReservationOutput(reservationId=sandbox.id,
-                                                           message='Uname {0} and pword {1} found '.format(uname,decrypt_password))
+                                                           message='Uname {0} and pword {1} found '.format(tfs_uname,decrypt_password))
 
     #Configure Azure apps
     azure_apps = sandbox.components.get_apps_by_name_contains('Azure')
@@ -31,7 +31,7 @@ def azure_app_extention(sandbox, components):
         #inject rsvnID, user name and password to the repo
         sandbox.apps_configuration.set_config_param(app=app,key='reservation_id',value=sandbox.id)
         sandbox.apps_configuration.set_config_param(app=app,key='qspword',value=decrypt_password)
-        sandbox.apps_configuration.set_config_param(app=app,key='qsuname',value=uname)
+        sandbox.apps_configuration.set_config_param(app=app,key='qsuname',value=tfs_uname)
         sandbox.automation_api.WriteMessageToReservationOutput(reservationId=sandbox.id,message='AzureFromMarket')
 
     sandbox.apps_configuration.apply_apps_configurations(azure_apps)
