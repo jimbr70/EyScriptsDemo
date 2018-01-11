@@ -51,13 +51,16 @@ Try {
     $msg= "`nExecuting command {0} "-f $execute_command
     Add-Content $logspath $msg
 
-    $cmd="c:\\{0}" -f $execute_command
+    $ps1,$params = $execute_command.split(" ",2)
+    Add-Content $logspath $params
+    
+    $cmd="c:\\{0}" -f $ps1
     Add-Content $logspath $cmd
 
     $a = "powershell -file $cmd"
     Add-Content $logspath $a
     
-    $invoke_results = Invoke-Expression $a
+    $invoke_results = Invoke-Expression "$cmd $params"
 
     Add-Content $logspath "Returned from Invoke-Expression. "
     Add-Content $logspath $invoke_results
