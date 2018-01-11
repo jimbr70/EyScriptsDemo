@@ -60,7 +60,7 @@ Try {
     $a = "powershell -file $cmd"
     Add-Content $logspath $a
     
-    $invoke_results = Invoke-Expression "$cmd $params"
+    $invoke_results = (Invoke-Expression "$cmd $params") 2>&1
 
     Add-Content $logspath "Returned from Invoke-Expression. "
     Add-Content $logspath $invoke_results
