@@ -1,5 +1,5 @@
 $logspath="c:\qs_scripts_logs.txt"
-New-Item $logspath -type file -force
+$junk = New-Item $logspath -type file -force
 Add-Content $logspath "==================main-cred.ps1=============V0.1============"
 
 $envVars = (gci env:*).GetEnumerator() | Sort-Object Name | Out-String
