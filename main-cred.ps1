@@ -61,14 +61,17 @@ Try {
     Add-Content $logspath $a
     
     $invoke_results = (Invoke-Expression "$cmd $params") 2>&1
-
+    if ($lastexitcode) {throw $invoke_results}
+    
     Add-Content $logspath "Returned from Invoke-Expression. "
     Add-Content $logspath $invoke_results
     Add-Content $logspath "Script main-cred.ps1 is complete."
 }
-Catch {
+Catch { 
+    $ret_rerr = $_
     $ErrorMessage = $_.Exception.Message
     $FailedItem = $_.Exception.ItemName
+    Add-Content $logspath $ret_err
     Add-Content $logspath "ERROR. FAILED execution of script!"
     Add-Content $logspath $ErrorMessage
     Add-Content $logspath $FailedItem
