@@ -52,11 +52,16 @@ Try {
     Add-Content $logspath $msg
 
     $cmd="c:\\{0}" -f $execute_command
+    Add-Content $logspath $cmd
 
     $a = "powershell -file $cmd"
-    Invoke-Expression $a
+    Add-Content $logspath $a
+    
+    $invoke_results = Invoke-Expression $a
 
-    Add-Content $logspath "Returned from Invoke-Expression.  Script main-cred.ps1 is complete."
+    Add-Content $logspath "Returned from Invoke-Expression. "
+    Add-Content $logspath $invoke_results
+    Add-Content $logspath "Script main-cred.ps1 is complete."
 }
 Catch {
     $ErrorMessage = $_.Exception.Message
