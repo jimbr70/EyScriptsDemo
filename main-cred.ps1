@@ -116,6 +116,7 @@ Try {
 } Catch {
     $ErrorMessage = $_.Exception.Message
     $FailedItem = $_.Exception.ItemName
+    Add-Content $logspath "ERROR in ftp section"
     Add-Content $logspath $ErrorMessage
     Add-Content $logspath $FailedItem
 }
