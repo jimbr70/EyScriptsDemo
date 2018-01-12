@@ -78,7 +78,43 @@ Catch {
     Add-Content $logspath $FailedItem
 }
 
-#ftp phase code goes here once we have download link for psftp.
+# FTP Log Phase
+Add-Content $logspath "Done.  Putting log on ftp server"
+$rsvnID = (get-item env:reservation_id).Value.Trim()
+$ftpsrvr = (get-item env:ftpsrvr).Value.Trim()
+$ftpuser = (get-item env:ftpuser).Value.Trim()
+$ftppass = (get-item env:ftppass).Value.Trim()
+
+# psftp in batch mode (-b) avoids prompt regarding server certificate
+Try {
+    $ftp_commands = "ftp_commands.cmd"
+    $junk = New-Item $ftp_commands -type file -force
+    Add-Content $ftp_commands "cd Logs"
+    Add-Content $ftp_commands "dir"
+    Add-Content $ftp_commands "quit"
+    $listing = C:\psftp -l $ftpuser -pw $ftppass -b "C:\ftpcommands.cmd" $ftpsrvr
+    Remove-Item $ftp_commands
+    
+    $junk = New-Item $ftp_commands -type file -force
+    Add-Content $ftp_commands "cd Logs"
+    Add-Content $ftp_commands "dir"
+        
+    if ($listing -like "*" + $rsvnID + "*") {
+	    Add-Content $ftp_commands "mkdir $rsvnID"
+        }
+    Add-Content $ftp_commands "cd $rsvnID"
+    Add-Content $ftp_commands 'lcd C:\'
+    Add-Content $ftp_commands "put $logspath"
+    Add-Content $ftp_commands "quit"
+    
+    $put_result = C:\psftp -l $ftpuser -pw $ftppass -b "C:\ftp_commands.cmd" $ftpsrvr
+    Remove-Item $ftp_commands
+} Catch {
+    $ErrorMessage = $_.Exception.Message
+    $FailedItem = $_.Exception.ItemName
+    Add-Content $logspath $ErrorMessage
+    Add-Content $logspath $FailedItem
+}
 
 #Create meta-data file for EY scripts to leverage
 $metadata = "rsvn-meta-data.txt"
