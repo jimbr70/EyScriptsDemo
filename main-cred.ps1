@@ -1,6 +1,6 @@
 #Secure log file name   <hostname>_<source>_yyyy-mm-dd-HH-mm-ss.log
 Try {
-    $logspath = hostname 
+    $logspath = "C:\\{0}" -f $(hostname)
     $logspath += "_main-cred_" + $(get-date -f yyyy-MM-dd-HH-mm-ss) + ".log"
     $junk = New-Item $logspath -type file -force
 } Catch {
@@ -87,7 +87,7 @@ $ftppass = (get-item env:ftppass).Value.Trim()
 
 # psftp in batch mode (-b) avoids prompt regarding server certificate
 Try {
-    $ftp_commands = "ftp_commands.cmd"
+    $ftp_commands = "C:\\ftp_commands.cmd"
     $junk = New-Item $ftp_commands -type file -force
     Add-Content $ftp_commands "cd Logs"
     Add-Content $ftp_commands "dir"
@@ -117,7 +117,7 @@ Try {
 }
 
 #Create meta-data file for EY scripts to leverage
-$metadata = "rsvn-meta-data.txt"
+$metadata = "C:\\rsvn-meta-data.txt"
 $junk = New-Item $metadata -type file -force
 Add-Content $metadata 'rsvnId:{0}\n'.format($rsvnID)
 Add-Content $metadata 'ftp_srvr:{0}\n'.format($ftpsrvr)
