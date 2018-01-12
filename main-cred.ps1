@@ -57,10 +57,10 @@ Try {
     Add-Content $logspath $msg
 
     $ps1,$params = $execute_command.split(" ",2)
-    Add-Content $logspath $params
+    #Add-Content $logspath $params
     
     $cmd="c:\\{0}" -f $ps1
-    Add-Content $logspath $cmd
+    #Add-Content $logspath $cmd
 
     $invoke_results = (Invoke-Expression "$cmd $params") 2>&1
     if ($lastexitcode) {throw $invoke_results}
@@ -92,7 +92,7 @@ Try {
     Add-Content $ftp_commands "cd Logs"
     Add-Content $ftp_commands "dir"
     Add-Content $ftp_commands "quit"
-    $listing = C:\psftp -l $ftpuser -pw $ftppass -b "C:\ftpcommands.cmd" $ftpsrvr
+    $listing = C:\\psftp -l $ftpuser -pw $ftppass -b "C:\\ftp_commands.cmd" $ftpsrvr
     Remove-Item $ftp_commands
     
     $junk = New-Item $ftp_commands -type file -force
@@ -107,7 +107,7 @@ Try {
     Add-Content $ftp_commands "put $logspath"
     Add-Content $ftp_commands "quit"
     
-    $put_result = C:\psftp -l $ftpuser -pw $ftppass -b "C:\ftp_commands.cmd" $ftpsrvr
+    $put_result = C:\psftp -l $ftpuser -pw $ftppass -b "C:\\ftp_commands.cmd" $ftpsrvr
     Remove-Item $ftp_commands
 } Catch {
     $ErrorMessage = $_.Exception.Message
