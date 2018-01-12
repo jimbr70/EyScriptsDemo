@@ -1,6 +1,15 @@
-$logspath="c:\qs_scripts_logs.txt"
-$junk = New-Item $logspath -type file -force
-Add-Content $logspath "==================main-cred.ps1=============V0.1============"
+#Secure log file name   <hostname>_<source>_yyyy-mm-dd-HH-mm-ss.log
+Try {
+    $logspath = hostname 
+    $logspath += "_main-cred_" + $(get-date -f yyyy-MM-dd-HH-mm-ss) + ".log"
+    $junk = New-Item $logspath -type file -force
+} Catch {
+    $logspath="c:\qsapps_main-cred.txt"
+    $junk = New-Item $logspath -type file -force
+    Add-Content $logspath "ERROR in setting up proper logfile name; using default."
+}
+
+Add-Content $logspath "main-cred.ps1=====V0.1======" + $(get-date -f yyyy-MM-dd-HH-mm-ss)
 
 $envVars = (gci env:*).GetEnumerator() | Sort-Object Name | Out-String
 Add-Content $logspath $envVars
@@ -11,14 +20,8 @@ $output=""
 $user = (get-item env:qsuname).Value.Trim()
 $pass = (get-item env:qspword).Value.Trim()
 
-# if hard set $uname, $pword
-#$user = "ET\V9999982"
-#$pass = "Chang3M3"
-
-$msg = "Credentials: user {0},  pass {1}" -f $user, $pass
-Add-Content $logspath $msg
-
-$execute_command=(get-item env:qsexecute_command).Value
+#$msg = "Credentials: user {0},  pass {1}" -f $user, $pass
+#Add-Content $logspath $msg
 
 Add-Content $logspath "`nStarting downloads"
     
@@ -48,6 +51,8 @@ For ($i=1; $i -le $script_count; $i++) {
 }
 
 Try {
+    $execute_command=(get-item env:qsexecute_command).Value
+
     $msg= "`nExecuting command {0} "-f $execute_command
     Add-Content $logspath $msg
 
@@ -57,15 +62,11 @@ Try {
     $cmd="c:\\{0}" -f $ps1
     Add-Content $logspath $cmd
 
-    $a = "powershell -file $cmd"
-    Add-Content $logspath $a
-    
     $invoke_results = (Invoke-Expression "$cmd $params") 2>&1
     if ($lastexitcode) {throw $invoke_results}
     
     Add-Content $logspath "Returned from Invoke-Expression. "
     Add-Content $logspath $invoke_results
-    Add-Content $logspath "Script main-cred.ps1 is complete."
 }
 Catch { 
     $ret_rerr = $_
@@ -76,5 +77,16 @@ Catch {
     Add-Content $logspath $ErrorMessage
     Add-Content $logspath $FailedItem
 }
+
+# FTP Log Phase
+Add-Content $logspath "Done.  Putting log on ftp server"
+$rsvnID = (get-item env:reservation_id).Value.Trim()
+$ftpsrvr = (get-item env:ftpsrvr).Value.Trim()
+$ftpuser = (get-item env:ftpuser).Value.Trim()
+$ftppass = (get-item env:ftppass).Value.Trim()
+
+# here we go
+
+Add-Content $logspath "Script main-cred.ps1 is complete."
 
 #END
