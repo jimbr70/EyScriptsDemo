@@ -98,7 +98,8 @@ Try {
     $junk = New-Item $ftp_commands -type file -force
     Add-Content $ftp_commands "cd Logs"
     Add-Content $ftp_commands "dir"
-        
+
+    Add-Content $logspath "pre if exists"
     if ($listing -like "*" + $rsvnID + "*") {
 	    Add-Content $ftp_commands "mkdir $rsvnID"
         }
