@@ -78,14 +78,7 @@ Catch {
     Add-Content $logspath $FailedItem
 }
 
-# FTP Log Phase
-Add-Content $logspath "Done.  Putting log on ftp server"
-$rsvnID = (get-item env:reservation_id).Value.Trim()
-$ftpsrvr = (get-item env:ftpsrvr).Value.Trim()
-$ftpuser = (get-item env:ftpuser).Value.Trim()
-$ftppass = (get-item env:ftppass).Value.Trim()
-
-# here we go
+#ftp phase code goes here once we have download link for psftp.
 
 Add-Content $logspath "Script main-cred.ps1 is complete."
 
