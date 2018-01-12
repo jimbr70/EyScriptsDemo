@@ -80,6 +80,14 @@ Catch {
 
 #ftp phase code goes here once we have download link for psftp.
 
+#Create meta-data file for EY scripts to leverage
+$meta-data = "rsvn-meta-data.txt"
+$junk = New-Item $meta-data -type file -force
+Add-Content $metadata 'rsvnId:{0}\n'.format(sandbox.id)
+Add-Content $metadata 'ftp_server:{0}\n'.format(ftp_server)
+Add-Content $metadata 'ftp_user:{0}\n'.format(ftp_uname)
+Add-Content $metadata 'ftp_pass:{0}\n'.format(ftp_decrypted)
+    
 Add-Content $logspath "Script main-cred.ps1 is complete."
 
 #END
