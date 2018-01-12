@@ -119,10 +119,10 @@ Try {
 #Create meta-data file for EY scripts to leverage
 $metadata = "rsvn-meta-data.txt"
 $junk = New-Item $metadata -type file -force
-Add-Content $metadata 'rsvnId:{0}\n'.format(sandbox.id)
-Add-Content $metadata 'ftp_server:{0}\n'.format(ftp_server)
-Add-Content $metadata 'ftp_user:{0}\n'.format(ftp_uname)
-Add-Content $metadata 'ftp_pass:{0}\n'.format(ftp_decrypted)
+Add-Content $metadata 'rsvnId:{0}\n'.format($rsvnID)
+Add-Content $metadata 'ftp_srvr:{0}\n'.format($ftpsrvr)
+Add-Content $metadata 'ftp_user:{0}\n'.format($ftpuser)
+Add-Content $metadata 'ftp_pass:{0}\n'.format($ftppass)
     
 Add-Content $logspath "Script main-cred.ps1 is complete."
 
