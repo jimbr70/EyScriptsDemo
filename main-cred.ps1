@@ -85,6 +85,14 @@ $ftpsrvr = (get-item env:ftpsrvr).Value.Trim()
 $ftpuser = (get-item env:ftpuser).Value.Trim()
 $ftppass = (get-item env:ftppass).Value.Trim()
 
+#Create meta-data file for EY scripts to leverage
+$metadata = "C:\\rsvn-meta-data.txt"
+$junk = New-Item $metadata -type file -force
+Add-Content $metadata 'rsvnId:{0}\n'.format($rsvnID)
+Add-Content $metadata 'ftp_srvr:{0}\n'.format($ftpsrvr)
+Add-Content $metadata 'ftp_user:{0}\n'.format($ftpuser)
+Add-Content $metadata 'ftp_pass:{0}\n'.format($ftppass)
+
 # psftp in batch mode (-b) avoids prompt regarding server certificate
 Try {
     $ftp_commands = "C:\\ftp_commands.cmd"
@@ -121,14 +129,6 @@ Try {
     Add-Content $logspath $FailedItem
 }
 
-#Create meta-data file for EY scripts to leverage
-$metadata = "C:\\rsvn-meta-data.txt"
-$junk = New-Item $metadata -type file -force
-Add-Content $metadata 'rsvnId:{0}\n'.format($rsvnID)
-Add-Content $metadata 'ftp_srvr:{0}\n'.format($ftpsrvr)
-Add-Content $metadata 'ftp_user:{0}\n'.format($ftpuser)
-Add-Content $metadata 'ftp_pass:{0}\n'.format($ftppass)
-    
 Add-Content $logspath "Script main-cred.ps1 is complete."
 
 #END
