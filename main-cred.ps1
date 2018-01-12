@@ -94,6 +94,7 @@ Try {
     Add-Content $ftp_commands "quit"
     $listing = C:\\psftp -l $ftpuser -pw $ftppass -b "C:\\ftp_commands.cmd" $ftpsrvr
     Remove-Item $ftp_commands
+    Add-Content $logspath "first done"
     
     $junk = New-Item $ftp_commands -type file -force
     Add-Content $ftp_commands "cd Logs"
