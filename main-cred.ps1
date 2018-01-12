@@ -103,6 +103,7 @@ Try {
     if ($listing -like "*" + $rsvnID + "*") {
 	    Add-Content $ftp_commands "mkdir $rsvnID"
         }
+    Add-Content $logspath "post if exists"
     Add-Content $ftp_commands "cd $rsvnID"
     Add-Content $ftp_commands 'lcd C:\'
     Add-Content $ftp_commands "put $logspath"
