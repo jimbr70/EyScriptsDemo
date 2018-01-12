@@ -86,12 +86,12 @@ $ftpuser = (get-item env:ftpuser).Value.Trim()
 $ftppass = (get-item env:ftppass).Value.Trim()
 
 #Create meta-data file for EY scripts to leverage
-$metadata = "C:\\rsvn-meta-data.txt"
+$metadata = "C:\rsvn-meta-data.txt"
 $junk = New-Item $metadata -type file -force
-Add-Content $metadata 'rsvnId:{0}\n'.format($rsvnID)
-Add-Content $metadata 'ftp_srvr:{0}\n'.format($ftpsrvr)
-Add-Content $metadata 'ftp_user:{0}\n'.format($ftpuser)
-Add-Content $metadata 'ftp_pass:{0}\n'.format($ftppass)
+Add-Content $metadata 'rsvnId:{0}'.format($rsvnID)
+Add-Content $metadata 'ftp_srvr:{0}'.format($ftpsrvr)
+Add-Content $metadata 'ftp_user:{0}'.format($ftpuser)
+Add-Content $metadata 'ftp_pass:{0}'.format($ftppass)
 
 # psftp in batch mode (-b) avoids prompt regarding server certificate
 Try {
@@ -100,6 +100,7 @@ Try {
     Add-Content $ftp_commands "cd Logs"
     Add-Content $ftp_commands "dir"
     Add-Content $ftp_commands "quit"
+    Add-Content $logspath "exec listing"
     $listing = C:\\psftp -l $ftpuser -pw $ftppass -b "C:\\ftp_commands.cmd" $ftpsrvr
     Add-Content $logspath "first done"
     Remove-Item $ftp_commands
