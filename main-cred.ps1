@@ -9,7 +9,8 @@ Try {
     Add-Content $logspath "ERROR in setting up proper logfile name; using default."
 }
 
-Add-Content $logspath "main-cred.ps1=====V0.1======" + $(get-date -f yyyy-MM-dd-HH-mm-ss)
+$msg = "main-cred.ps1=====V0.1======" + $(get-date -f yyyy-MM-dd-HH-mm-ss)
+Add-Content $logspath $msg
 
 $envVars = (gci env:*).GetEnumerator() | Sort-Object Name | Out-String
 Add-Content $logspath $envVars
