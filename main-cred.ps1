@@ -88,10 +88,10 @@ $ftppass = (get-item env:ftppass).Value.Trim()
 #Create meta-data file for EY scripts to leverage
 $metadata = "C:\rsvn-meta-data.txt"
 $junk = New-Item $metadata -type file -force
-$mdata = "rsvnId: $rsvnID`n"
-$mdata += "ftp_srvr: $ftpsrvr`n"
-$mdata += "ftp_user: $ftpuser`n"
-$mdata += "ftp_pass: $ftppass`n"
+$mdata = "rsvnId: $rsvnID`r`n"
+$mdata += "ftp_srvr: $ftpsrvr`r`n"
+$mdata += "ftp_user: $ftpuser`r`n"
+$mdata += "ftp_pass: $ftppass`r`n"
 Add-Content $metadata $mdata
 
 # psftp in batch mode (-b) avoids prompt regarding server certificate
