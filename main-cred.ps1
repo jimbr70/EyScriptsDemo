@@ -20,9 +20,6 @@ $output=""
 $user = (get-item env:qsuname).Value.Trim()
 $pass = (get-item env:qspword).Value.Trim()
 
-#$msg = "Credentials: user {0},  pass {1}" -f $user, $pass
-#Add-Content $logspath $msg
-
 Add-Content $logspath "`nStarting downloads"
     
 For ($i=1; $i -le $script_count; $i++) {
@@ -123,6 +120,7 @@ Try {
     Add-Content $ftp_commands "quit"
     
     $put_result = C:\psftp -l $ftpuser -pw $ftppass -hostkey 02:ad:78:83:26:86:b2:74:6f:0c:a3:c1:9d:10:79:5d -b "C:\ftp_commands.scr" $ftpsrvr
+    Add-Content $logspath $put_result
     Remove-Item $ftp_commands
 } Catch {
     $ErrorMessage = $_.Exception.Message
