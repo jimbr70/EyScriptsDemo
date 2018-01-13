@@ -96,15 +96,15 @@ Add-Content $metadata $mdata
 
 # psftp in batch mode (-b) avoids prompt regarding server certificate
 Try {
-    $ftp_commands = "C:\\ftp_commands.cmd"
+    $ftp_commands = "C:\ftp_commands.scr"
     $junk = New-Item $ftp_commands -type file -force
     Add-Content $ftp_commands "cd Logs"
     Add-Content $ftp_commands "dir"
     Add-Content $ftp_commands "quit"
     Add-Content $logspath "exec listing"
-    $listing = C:\\psftp -l $ftpuser -pw $ftppass -b "C:\\ftp_commands.cmd" $ftpsrvr
+    $listing = C:\\psftp -l $ftpuser -pw $ftppass -hostkey 02:ad:78:83:26:86:b2:74:6f:0c:a3:c1:9d:10:79:5d -b "C:\ftp_commands.scr" $ftpsrvr
     Add-Content $logspath $listing
-    #put in some test for content of $listing variable, report if not just roughly as expected
+    #put in some test for content of $listing variable like *drwdrw*, report if not just roughly as expected
     Remove-Item $ftp_commands
     Add-Content $logspath "first removed"
     
@@ -122,7 +122,7 @@ Try {
     Add-Content $ftp_commands "put $logspath"
     Add-Content $ftp_commands "quit"
     
-    $put_result = C:\psftp -l $ftpuser -pw $ftppass -b "C:\\ftp_commands.cmd" $ftpsrvr
+    $put_result = C:\psftp -l $ftpuser -pw $ftppass -hostkey 02:ad:78:83:26:86:b2:74:6f:0c:a3:c1:9d:10:79:5d -b "C:\ftp_commands.scr" $ftpsrvr
     Remove-Item $ftp_commands
 } Catch {
     $ErrorMessage = $_.Exception.Message
