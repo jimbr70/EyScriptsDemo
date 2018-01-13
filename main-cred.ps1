@@ -103,7 +103,7 @@ Try {
     Add-Content $ftp_commands "quit"
     Add-Content $logspath "exec listing"
     $listing = C:\\psftp -l $ftpuser -pw $ftppass -b "C:\\ftp_commands.cmd" $ftpsrvr
-    Add-Content $logspath "first done"
+    Add-Content $logspath $listing
     Remove-Item $ftp_commands
     Add-Content $logspath "first removed"
     
