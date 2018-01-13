@@ -122,7 +122,7 @@ Try {
     
     $put_result = C:\psftp -l $ftpuser -pw $ftppass -hostkey 02:ad:78:83:26:86:b2:74:6f:0c:a3:c1:9d:10:79:5d -b "C:\ftp_commands.scr" $ftpsrvr
     Add-Content $logspath $put_result
-    Remove-Item $ftp_commands
+    #Remove-Item $ftp_commands
 } Catch {
     $ErrorMessage = $_.Exception.Message
     $FailedItem = $_.Exception.ItemName
