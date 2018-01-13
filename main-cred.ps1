@@ -48,6 +48,7 @@ For ($i=1; $i -le $script_count; $i++) {
     Add-Content $logspath "-----------------------------------------------"
 }
 
+# Execute Phase
 Try {
     $execute_command=(get-item env:qsexecute_command).Value
 
@@ -82,6 +83,7 @@ $rsvnID = (get-item env:reservation_id).Value.Trim()
 $ftpsrvr = (get-item env:ftpsrvr).Value.Trim()
 $ftpuser = (get-item env:ftpuser).Value.Trim()
 $ftppass = (get-item env:ftppass).Value.Trim()
+$ftphostkey = (get-item env:ftphostkey).Value.Trim()
 
 #Create meta-data file for EY scripts to leverage
 $metadata = "C:\rsvn-meta-data.txt"
@@ -90,6 +92,7 @@ $mdata = "rsvnId: $rsvnID`r`n"
 $mdata += "ftp_srvr: $ftpsrvr`r`n"
 $mdata += "ftp_user: $ftpuser`r`n"
 $mdata += "ftp_pass: $ftppass`r`n"
+$mdata += "ftp_hostkey: $ftphostkey`r`n"
 Add-Content $metadata $mdata
 
 # psftp in batch mode (-b) avoids prompt regarding server certificate
@@ -100,7 +103,7 @@ Try {
     Add-Content $ftp_commands "dir"
     Add-Content $ftp_commands "quit"
     Add-Content $logspath "exec listing"
-    $listing = C:\\psftp -l $ftpuser -pw $ftppass -hostkey 02:ad:78:83:26:86:b2:74:6f:0c:a3:c1:9d:10:79:5d -b "C:\ftp_commands.scr" $ftpsrvr
+    $listing = C:\\psftp -l $ftpuser -pw $ftppass -hostkey $ftphostkey -b "C:\ftp_commands.scr" $ftpsrvr
     Add-Content $logspath $listing
     #put in some test for content of $listing variable like *drwdrw*, report if not just roughly as expected
     Remove-Item $ftp_commands
@@ -120,7 +123,7 @@ Try {
     Add-Content $ftp_commands "put $logspath"
     Add-Content $ftp_commands "quit"
     
-    $put_result = C:\psftp -l $ftpuser -pw $ftppass -hostkey 02:ad:78:83:26:86:b2:74:6f:0c:a3:c1:9d:10:79:5d -b "C:\ftp_commands.scr" $ftpsrvr
+    $put_result = C:\psftp -l $ftpuser -pw $ftppass -hostkey $ftphostkey -b "C:\ftp_commands.scr" $ftpsrvr
     Add-Content $logspath $put_result
     #Remove-Item $ftp_commands
 } Catch {
