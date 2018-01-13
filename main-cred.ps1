@@ -114,7 +114,7 @@ Try {
     Add-Content $ftp_commands "dir"
 
     Add-Content $logspath "pre if exists"
-    if ($listing -like "*" + $rsvnID + "*") {
+    if ($listing -notlike "*" + $rsvnID + "*") {
 	    Add-Content $ftp_commands "mkdir $rsvnID"
         }
     Add-Content $logspath "post if exists"
