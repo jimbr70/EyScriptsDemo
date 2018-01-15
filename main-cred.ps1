@@ -44,6 +44,7 @@ For ($i=1; $i -le $script_count; $i++) {
         $FailedItem = $_.Exception.ItemName
         Add-Content $logspath $ErrorMessage
         Add-Content $logspath $FailedItem
+	throw
     }
     Add-Content $logspath "-----------------------------------------------"
 }
@@ -75,6 +76,7 @@ Catch {
     Add-Content $logspath "ERROR. FAILED execution of script!"
     Add-Content $logspath $ErrorMessage
     Add-Content $logspath $FailedItem
+    throw
 }
 
 # FTP Log Phase
