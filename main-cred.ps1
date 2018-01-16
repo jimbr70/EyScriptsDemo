@@ -1,4 +1,4 @@
-#Secure log file name   <hostname>_<source>_yyyy-mm-dd-HH-mm-ss.log
+#main-cred.ps1
 Try {
     New-Item -ItemType Directory -Force -Path C:\csd\logs
     $logspath = "C:\csd\logs\{0}" -f $(hostname)
