@@ -1,6 +1,7 @@
 #Secure log file name   <hostname>_<source>_yyyy-mm-dd-HH-mm-ss.log
 Try {
-    $logspath = "C:\\{0}" -f $(hostname)
+    New-Item -ItemType Directory -Force -Path C:\csd\logs
+    $logspath = "C:\csd\logs\{0}" -f $(hostname)
     $logspath += "_main-cred_" + $(get-date -f yyyy-MM-dd-HH-mm-ss) + ".log"
     $junk = New-Item $logspath -type file -force
 } Catch {
@@ -32,7 +33,7 @@ For ($i=1; $i -le $script_count; $i++) {
         
         #Followining is unique to EY's TFS, so far....consistent.
         $fileName = $script_url.Substring($script_url.LastIndexOf("/")+1).Split("&")[0]
-        $output="c:\\{0}" -f $fileName
+        $output="c:\csd\{0}" -f $fileName
         Add-Content $logspath $output
     
         $securepassword = ConvertTo-SecureString $pass -AsPlainText -Force
@@ -59,7 +60,7 @@ Try {
     $ps1,$params = $execute_command.split(" ",2)
     #Add-Content $logspath $params
     
-    $cmd="c:\\{0}" -f $ps1
+    $cmd="c:\csd\{0}" -f $ps1
     #Add-Content $logspath $cmd
 
     $invoke_results = (Invoke-Expression "$cmd $params") 2>&1
@@ -88,7 +89,7 @@ $ftppass = (get-item env:ftppass).Value.Trim()
 $ftphostkey = (get-item env:ftphostkey).Value.Trim()
 
 #Create meta-data file for EY scripts to leverage
-$metadata = "C:\rsvn-meta-data.txt"
+$metadata = "C:\csd\rsvn-meta-data.txt"
 $junk = New-Item $metadata -type file -force
 $mdata = "rsvnId: $rsvnID`r`n"
 $mdata += "ftp_srvr: $ftpsrvr`r`n"
@@ -99,13 +100,13 @@ Add-Content $metadata $mdata
 
 # psftp in batch mode (-b) avoids prompt regarding server certificate
 Try {
-    $ftp_commands = "C:\ftp_commands.scr"
+    $ftp_commands = "C:\csd\ftp_commands.scr"
     $junk = New-Item $ftp_commands -type file -force
     Add-Content $ftp_commands "cd Logs"
     Add-Content $ftp_commands "dir"
     Add-Content $ftp_commands "quit"
     Add-Content $logspath "exec listing"
-    $listing = C:\\psftp -l $ftpuser -pw $ftppass -hostkey $ftphostkey -b "C:\ftp_commands.scr" $ftpsrvr
+    $listing = C:\csd\psftp -l $ftpuser -pw $ftppass -hostkey $ftphostkey -b "C:\csd\ftp_commands.scr" $ftpsrvr
     Add-Content $logspath $listing
     #put in some test for content of $listing variable like *drwdrw*, report if not just roughly as expected
     Remove-Item $ftp_commands
@@ -125,7 +126,7 @@ Try {
     Add-Content $ftp_commands "put $logspath"
     Add-Content $ftp_commands "quit"
     
-    $put_result = C:\psftp -l $ftpuser -pw $ftppass -hostkey $ftphostkey -b "C:\ftp_commands.scr" $ftpsrvr
+    $put_result = C:\csd\psftp -l $ftpuser -pw $ftppass -hostkey $ftphostkey -b "C:\ftp_commands.scr" $ftpsrvr
     Add-Content $logspath $put_result
     #Remove-Item $ftp_commands
 } Catch {
