@@ -126,7 +126,7 @@ Try {
     Add-Content $ftp_commands "put $logspath"
     Add-Content $ftp_commands "quit"
     
-    $put_result = C:\csd\psftp -l $ftpuser -pw $ftppass -hostkey $ftphostkey -b "C:\ftp_commands.scr" $ftpsrvr
+    $put_result = C:\csd\psftp -l $ftpuser -pw $ftppass -hostkey $ftphostkey -b "C:\csd\ftp_commands.scr" $ftpsrvr
     Add-Content $logspath $put_result
     #Remove-Item $ftp_commands
 } Catch {
