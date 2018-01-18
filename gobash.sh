@@ -4,8 +4,8 @@ hostname
 pwd
 echo "The script starts now."
 
-echo "Hi, $USER!"
+echo "Hi, $USER"
 w
 cd /tmp
 touch abc123
-
+ll
