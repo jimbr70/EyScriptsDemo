@@ -3,4 +3,5 @@
 hostname >C:/tmp/log.txt
 pwd >C:/tmp/log.txt
 echo "The script starts now." >C:/tmp/log.txt
+echo "The script starts now2." 
 echo "Hi, $USER"  >C:/tmp/log.txt
