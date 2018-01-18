@@ -1,11 +1,9 @@
 #!/bin/bash
 #Basics - just something to run
-hostname
-pwd
-echo "The script starts now."
-
-echo "Hi, $USER"
-w
+hostname >C:/tmp/log.txt
+pwd >C:/tmp/log.txt
+echo "The script starts now." >C:/tmp/log.txt
+echo "Hi, $USER"  >C:/tmp/log.txt
 cd /tmp
 touch abc123
 
