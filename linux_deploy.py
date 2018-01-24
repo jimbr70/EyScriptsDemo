@@ -3,13 +3,10 @@ import time
 import logging
 import socket
 import requests
-from requests_ntlm import HttpNtlmAuth
 
 
 timestr = time.strftime("%Y%m%d-%H%M%S")
 newpath = r'/tmp/csd'
-# if not os.path.exists(newpath):
-#   os.makedirs(newpath)
 logfilename = newpath + '/' + socket.gethostname() + '_linux_deploy_' + timestr + '.txt'
 logging.basicConfig(filename=logfilename,level=logging.DEBUG, format='%(asctime)s %(message)s')
 
@@ -78,20 +75,15 @@ for scr_num in range(1, qsscript_count +1):
     script_url = os.environ[script_name]
     if script_url != 'tbd':
         ### - for testing
-        #script_url = 'http://10.254.34.24:8080/tfs/DefaultCollection/Migration Factory-CloudShell POC/_api/_versioncontrol/itemContent?repositoryId=78d6293c-71cd-4c07-8e3e-6f85e30e6144&path=/Linux/market-to-ey.sh'
+        script_url = 'http://10.254.34.24:8080/tfs/DefaultCollection/d3782bb2-7bbf-48fd-8f3a-0b7e24507bac/_api/_versioncontrol/itemContent?repositoryId=78d6293c-71cd-4c07-8e3e-6f85e30e6144&path=/sccm/Deploy-SCCMClient.ps1&version=GBmaster&contentOnly=false&__v=5'
         ###
 
         script_name = script_url.rsplit('/', 1)[-1]
         logging.info("Processing %s" % script_name)
 
         try:
-            session = requests.Session()
-            session.auth = HttpNtlmAuth('L.CMFCS.01','JjFjtX!#E+D8w63Q')
-            content = session.get(script_url)
-            #save content to file
-            save_to = open(("/tmp/csd/%s" % script_name), "w+")
-            save_to.write(content.content)
-            save_to.close()
+            getthis = "curl --ntlm --user '%s:%s' '%s' -o %s" % (qsuname, qspword, script_url, script_name)
+            os.system(getthis)
         except:
             logging.error('Failed to process file. %s' % sys.exc_info()[0])
             raise Exception(sys.exc_info()[0])
