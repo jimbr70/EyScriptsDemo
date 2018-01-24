@@ -79,6 +79,8 @@ for scr_num in range(1, int(qsscript_count) +1):
         try:
             getthis = "curl --ntlm --user '%s:%s' '%s' -o %s" % (qsuname, qspword, script_url, script_name)
             os.system(getthis)
+            if script_name.endswith('.sh'):
+                os.system('chmod 775 %s' % script_name)
         except:
             logging.error('Failed to process file. %s' % sys.exc_info()[0])
             raise Exception(sys.exc_info()[0])
