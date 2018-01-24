@@ -73,7 +73,7 @@ for scr_num in range(1, int(qsscript_count) +1):
     script_name = 'qsscript{0}_url'.format(str(scr_num))
     logging.info("processing {0}".format(script_name))
     script_url = os.environ[script_name]
-    if script_url != 'tbd':
+    if script_url != 'tbd' and '.exe' not in script_url:
         ### - for testing
         script_url = 'http://10.254.34.24:8080/tfs/DefaultCollection/d3782bb2-7bbf-48fd-8f3a-0b7e24507bac/_api/_versioncontrol/itemContent?repositoryId=78d6293c-71cd-4c07-8e3e-6f85e30e6144&path=/sccm/Deploy-SCCMClient.ps1&version=GBmaster&contentOnly=false&__v=5'
         ###
