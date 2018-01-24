@@ -69,7 +69,7 @@ except:
     logging.warn("no env var found for resource_list")
 
 # Download Scripts/Files
-for scr_num in range(1, qsscript_count +1):
+for scr_num in range(1, int(qsscript_count) +1):
     script_name = 'qsscript{0}_url'.format(str(scr_num))
     logging.info("processing {0}".format(script_name))
     script_url = os.environ[script_name]
