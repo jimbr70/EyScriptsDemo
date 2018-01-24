@@ -89,7 +89,7 @@ for scr_num in range(1, int(qsscript_count) +1):
             raise Exception(sys.exc_info()[0])
 
 # Process Execute Command
-if execute_command != 'none':
+if qsexecute_command != 'none':
     try:
         logging.info('Executing %s ' % qsexecute_command)
         exec_results = os.system(qsexecute_command)
