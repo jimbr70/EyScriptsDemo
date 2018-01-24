@@ -74,13 +74,8 @@ for scr_num in range(1, int(qsscript_count) +1):
     logging.info("processing {0}".format(script_name))
     script_url = os.environ[script_name]
     if script_url != 'tbd' and not '.exe' in script_url:
-        ### - for testing
-        script_url = 'http://10.254.34.24:8080/tfs/DefaultCollection/d3782bb2-7bbf-48fd-8f3a-0b7e24507bac/_api/_versioncontrol/itemContent?repositoryId=78d6293c-71cd-4c07-8e3e-6f85e30e6144&path=/sccm/Deploy-SCCMClient.ps1&version=GBmaster&contentOnly=false&__v=5'
-        ###
-
         script_name = script_url.rsplit('/', 1)[-1]
         logging.info("Processing %s" % script_name)
-
         try:
             getthis = "curl --ntlm --user '%s:%s' '%s' -o %s" % (qsuname, qspword, script_url, script_name)
             os.system(getthis)
@@ -100,6 +95,7 @@ if qsexecute_command != 'none':
         raise Exception(sys.exc_info()[0])
 
 # create metadatda file
+logging.info('Creating metadata file.')
 metafile = open("/tmp/csd/rsvn-meta-data.txt","w+")
 metafile.writelines("rsvnId: %s \r\n" % reservation_id)
 metafile.writelines("ftp_srvr: %s \r\n" % ftpsrvr)
@@ -110,15 +106,18 @@ metafile.writelines("resource_list: %s \r\n" % resource_list)
 metafile.close()
 
 # Push log remote using a mount to a windows share
+logging.info('Mounting windows share')
 mountup = "wuser='Qu@l!R0cks#@!'\n"
 mountup += "srusr='" + qspword + "'\n"
+mountup += "mkdir /tmp/csd/RemoteLogs\n"
+mountup += "chmod 775 RemoteLogs\n"
 mountup += "echo $wuser | sudo -S mount -t cifs -o username=L.CMFCS.01,password=$srusr,domain=et.lab,dir_mode=0777,file_mode=0777 //10.254.34.70/TestShell/ ./RemoteLogs\n"
-mountup += "ls /home/wuser/RemoteLogs\n"
-mountcmds = open('mnt.sh', 'w+')
-mountcmds.write(mountup)
-mountcmds.close()
-mountperm = os.system('chmod 775 mnt.sh')
-mountchk = os.popen('./mnt.sh').read().replace('\n', ' ')
+mountup += "ls /tmp/csd/RemoteLogs\n"
+mountfile = open('mountShare.sh', 'w+')
+mountfile.write(mountup)
+mountfile.close()
+mountperm = os.system('chmod 775 mountShare.sh')
+mountchk = os.popen('./mountShare.sh').read().replace('\n', ' ')
 
 if not reservation_id in mountchk:
     os.system('mkdir ./RemoteLogs/%s' % reservation_id)
@@ -132,3 +131,5 @@ logging.info(mountchk)
 umount = "wuser='Qu@l!R0cks#@!'\n"
 umount += 'echo $wuser | sudo -S umount -f -l ./RemoteLogs/\n'
 os.system(umount)
+
+logging.info('Script Complete')
