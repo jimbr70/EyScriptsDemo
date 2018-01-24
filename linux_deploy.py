@@ -8,8 +8,8 @@ from requests_ntlm import HttpNtlmAuth
 
 timestr = time.strftime("%Y%m%d-%H%M%S")
 newpath = r'/tmp/csd'
-if not os.path.exists(newpath):
-    os.makedirs(newpath)
+# if not os.path.exists(newpath):
+#   os.makedirs(newpath)
 logfilename = newpath + '/' + socket.gethostname() + '_linux_deploy_' + timestr + '.txt'
 logging.basicConfig(filename=logfilename,level=logging.DEBUG, format='%(asctime)s %(message)s')
 
