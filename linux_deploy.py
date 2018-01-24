@@ -77,8 +77,8 @@ for scr_num in range(1, qsscript_count +1):
     logging.info("processing {0}".format(script_name))
     script_url = os.environ[script_name]
     if script_url != 'tbd':
-        ### - 2 test
-        script_url = 'http://10.254.34.24:8080/tfs/DefaultCollection/Migration Factory-CloudShell POC/_api/_versioncontrol/itemContent?repositoryId=78d6293c-71cd-4c07-8e3e-6f85e30e6144&path=/Linux/market-to-ey.sh'
+        ### - for testing
+        #script_url = 'http://10.254.34.24:8080/tfs/DefaultCollection/Migration Factory-CloudShell POC/_api/_versioncontrol/itemContent?repositoryId=78d6293c-71cd-4c07-8e3e-6f85e30e6144&path=/Linux/market-to-ey.sh'
         ###
 
         script_name = script_url.rsplit('/', 1)[-1]
@@ -118,11 +118,6 @@ metafile.writelines("resource_list: %s \r\n" % resource_list)
 metafile.close()
 
 # Push log remote using a mount to a windows share
-#
-import os
-reservation_id = '321-rew-432-rew'
-qspword = 'JjFjtX!#E+D8w63Q'
-
 mountup = "wuser='Qu@l!R0cks#@!'\n"
 mountup += "srusr='" + qspword + "'\n"
 mountup += "echo $wuser | sudo -S mount -t cifs -o username=L.CMFCS.01,password=$srusr,domain=et.lab,dir_mode=0777,file_mode=0777 //10.254.34.70/TestShell/ ./RemoteLogs\n"
