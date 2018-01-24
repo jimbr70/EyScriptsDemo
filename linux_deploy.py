@@ -89,15 +89,15 @@ for scr_num in range(1, qsscript_count +1):
             raise Exception(sys.exc_info()[0])
 
 # Process Execute Command
-try:
-    logging.info('Executing %s ' % qsexecute_command)
-    #exec_results = subprocess.call([qsexecute_command]) #
-    exec_results = os.system(qsexecute_command)
-    logging.info(exec_results)
-    logging.info('execution complete.')
-except:
-    logging.error('Failed to successfully execute command.  %s' % sys.exc_info()[0])
-    raise Exception(sys.exc_info()[0])
+if execute_command != 'none':
+    try:
+        logging.info('Executing %s ' % qsexecute_command)
+        exec_results = os.system(qsexecute_command)
+        logging.info(exec_results)
+        logging.info('execution complete.')
+    except:
+        logging.error('Failed to successfully execute command.  %s' % sys.exc_info()[0])
+        raise Exception(sys.exc_info()[0])
 
 # create metadatda file
 metafile = open("/tmp/csd/rsvn-meta-data.txt","w+")
