@@ -1,5 +1,5 @@
 #!/bin/bash
 cd /tmp
 mkdir csd
-cd csd
+cd /tmp/csd
 python .\linux_deploy.py
