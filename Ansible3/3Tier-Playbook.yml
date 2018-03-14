@@ -1,0 +1,26 @@
+---
+# This playbook is a sample... 1 app uses this, others use do-nothing-playbook.
+ - name: PingW
+   hosts: [app_servers]
+   gather_facts: false
+
+   tasks:
+   - name: pingwin
+     win_ping:
+
+   - name: hellofromhost
+     win_command: hostname
+     register: hostname
+   - debug: msg="{{ hostname.stdout }}"
+
+ - name: Tier3Work
+   hosts: [tier3]
+   gather_facts: false
+
+   tasks:
+   - name: t3task
+     win_command: ipconfig
+     register: ipconfig
+   - debug: msg="{{ ipconfig.stdout }}"
+   
+   
