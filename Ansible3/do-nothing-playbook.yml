@@ -1,0 +1,7 @@
+---
+# This playbook does nothing - it is called by all apps in a sandbox, except one
+  - name: NothingAtAll
+    hosts: [app_servers]
+    gather_facts: false
+    
+    
