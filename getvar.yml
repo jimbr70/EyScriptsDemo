@@ -2,12 +2,8 @@
 - name: varck
   hosts: tier2
   vars:
-  - msg: "{{ansible_env.install_scenario|default('Not found')}}"
-  - inst: "{{ lookup('env','install_scenario') }}"
-
+  - scenario: "{{install_scenario|default('None Set')}}"
+  
   tasks:
   - name: Print install_scenario
-    debug: var=msg
-
-  - name: Actually expected here
-    debug: var=inst
+    debug: var=scenario
