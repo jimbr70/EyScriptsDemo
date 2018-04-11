@@ -7,5 +7,7 @@
   - name: Print install_scenario
     debug: var=msg
 
+  vars:
+    local_home: "{{ lookup('env','install_scenario') }}"
   - debug: var=ansible_env
 
