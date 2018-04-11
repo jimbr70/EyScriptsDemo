@@ -1,0 +1,11 @@
+---
+- name: varck
+  hosts: tier1
+  vars:
+  - msg: "{{ansible_env.install_scenario|default('Not found')}}"
+  tasks:
+  - name: Print install_scenario
+    debug: var=msg
+
+  - debug: var=ansible_env
+
