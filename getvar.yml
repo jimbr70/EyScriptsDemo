@@ -1,6 +1,6 @@
 ---
 - name: varck
-  hosts: tier2
+  hosts: app_servers
   vars:
   - scenario: "{{install_scenario|default('None Set')}}"
   
