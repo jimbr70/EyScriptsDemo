@@ -1,6 +1,6 @@
 ---
 - name: varck
-  hosts: tier1
+  hosts: tier2
   vars:
   - msg: "{{ansible_env.install_scenario|default('Not found')}}"
   tasks:
