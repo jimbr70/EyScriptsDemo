@@ -9,6 +9,6 @@
 
   - name: Pausing  2min   while deploy sccm runs a bit  NO SMARTS YET
     pause:
-      seconds: 1800
+      seconds: 3660
       prompt: no
 
