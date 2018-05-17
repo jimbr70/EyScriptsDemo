@@ -7,8 +7,8 @@
   - name: ping
     win_ping:
 
-  - name: Pausing  5400s  while deploy sccm runs a bit  NO SMARTS YET
+  - name: Pausing  300s  while deploy sccm runs a bit  NO SMARTS YET
     pause:
-      seconds: 5400
+      seconds: 300
       prompt: no
 
