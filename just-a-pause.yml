@@ -1,0 +1,9 @@
+---
+# This playbook just pauses for testing purposes
+  hosts: all 
+
+  tasks:
+  - name: Pausing  3s  as if waiting for something
+    pause:
+      seconds: 3
+      prompt: no
