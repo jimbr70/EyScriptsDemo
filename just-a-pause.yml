@@ -1,5 +1,6 @@
 ---
 # This playbook just pauses for testing purposes
+- name: PauserPauser
   hosts: all 
 
   tasks:
