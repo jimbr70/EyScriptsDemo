@@ -7,8 +7,8 @@
   - name: ping
     win_ping:
 
-  - name: Pausing  30s  as if waiting for something....  NO SMARTS YET
+  - name: Pausing  3780s  as if waiting for something....  NO SMARTS YET
     pause:
-      seconds: 30
+      seconds: 3780
       prompt: no
 
