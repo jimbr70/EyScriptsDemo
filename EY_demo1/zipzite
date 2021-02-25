@@ -1,3 +1,0 @@
-zip site.zip -r Azure_or_VMware.yml Deploy_SCCM.yml filter_plugins/ group_vars/ host_vars/ IIS_Install.yml inventory library/ module_utils/ roles/ site.yml
-sudo cp site.zip /tmp/csd/RemoteLogs/site.zip
-
